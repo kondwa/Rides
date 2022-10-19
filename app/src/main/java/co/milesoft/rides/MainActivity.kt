@@ -17,6 +17,14 @@ class MainActivity : AppCompatActivity() {
             FirebaseAuth.getInstance().signOut()
             startSignInActivity()
         }
+        binding.buttonDrive.setOnClickListener {
+            val i = Intent(this,DriveActivity::class.java)
+            startActivity(i)
+        }
+        binding.buttonRide.setOnClickListener {
+            val i = Intent(this,RideActivity::class.java)
+            startActivity(i)
+        }
     }
 
     override fun onResume() {

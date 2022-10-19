@@ -7,6 +7,7 @@ import co.milesoft.rides.misc.toast
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
+import com.google.firebase.auth.FirebaseAuth
 
 class SignInActivity : AppCompatActivity() {
     private val signInLauncher = registerForActivityResult(FirebaseAuthUIActivityResultContract()){
@@ -24,7 +25,10 @@ class SignInActivity : AppCompatActivity() {
     private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
         val response = result.idpResponse
         if (result.resultCode == RESULT_OK){
-            startMainActivity()
+            var user = FirebaseAuth.getInstance().currentUser
+            user.let {
+                startMainActivity()
+            }
         }else{
             toast(response?.error?.message.toString())
         }
